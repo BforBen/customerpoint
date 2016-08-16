@@ -1,0 +1,47 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@* builds the "straight to" and "More" links on landing pages *@
+
+@{
+    int mainCount;
+
+    string mainName = umbraco.library.GetDictionaryItem("MainSection");
+	string ignoreType = "SectionHomepage";
+
+    @* overrides - can be passed in the viewdata *@
+
+    if (ViewData["mainName"] != null) 
+    {        
+        mainName = ViewData["mainName"].ToString();
+    }
+	if (ViewData["ignoreType"] != null)
+    {
+        ignoreType = ViewData["ignoreType"].ToString();
+    }
+    
+    var nodes = Model.Content.Children.Where(x => x.IsVisible() && x.DocumentTypeAlias != ignoreType); 
+}
+
+@if ( nodes.Any() )
+{
+
+	if ( !string.IsNullOrEmpty(mainName))
+	{   
+    	<div class="row">
+        	<div class="col-xs-12">
+            	<h2 class="landing">@mainName</h2>
+        	</div>
+    	</div>
+	}
+
+	<div class="row">
+		<div class="col-xs-12">
+			<ol class="list-group list-contents list-contents-bottom-divider">
+			@foreach(var node in nodes)
+			{
+				<li class="list-group-item"><a href="@node.Url">@node.GetPropertyValue("title")</a> @node.GetPropertyValue("landingSummary")</li>
+			}
+			</ol>
+		</div>
+	</div>
+}

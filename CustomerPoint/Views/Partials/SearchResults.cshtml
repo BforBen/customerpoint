@@ -1,0 +1,15 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+	
+@if (!string.IsNullOrEmpty(Request.QueryString["q"]))    
+{
+    <div class="list-contents list-contents-bottom-divider">
+        @foreach (var result in Umbraco.TypedSearch(Request.QueryString["q"]))
+        {
+            <li class="list-group-item">
+                <h3><a href="@result.Url">@result.GetPropertyValue("title")</a></h3>
+				<span class="search-meta">@result.Url</span>
+				@result.GetPropertyValue("summary")
+            </li>
+        }
+    </div>
+}   

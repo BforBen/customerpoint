@@ -1,0 +1,7 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "SideNavPages.cshtml";
+}
+@Html.Partial("PageHeader")
+@Umbraco.Field("bodyText")
+@Html.Partial("DisplayChildPages")

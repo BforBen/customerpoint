@@ -1,0 +1,12 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = null;
+
+    var redirectUrl = Model.Content.GetPropertyValue<string>("redirectUrl");
+    if (!string.IsNullOrWhiteSpace(redirectUrl))
+    {
+        Response.Clear();
+        Response.Redirect(redirectUrl);
+        Response.End();
+    }
+}

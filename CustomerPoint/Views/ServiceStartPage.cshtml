@@ -1,0 +1,55 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "Site.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="page-header">
+            <h1>@Umbraco.Field("title")</h1>
+			@if (@CurrentPage.HasValue("subTitle"))
+			{
+				<p class="lead">@Umbraco.Field("subTitle")</p>
+			}
+        </div>
+
+		<div class="form-group">
+		@Umbraco.Field("bodyText")
+		</div>
+			
+		<div class="form-group">
+			<a href="@Umbraco.Field("serviceUrl")" title="" rel="nofollow" class="btn btn-primary btn-start btn-lg">Start now <i class="glyphicon glyphicon-chevron-right"></i></a>
+		</div>
+			
+		<ul class="nav nav-tabs" role="tablist">
+			@if (CurrentPage.HasValue("beforeYouStart"))
+        	{
+  				<li class="active"><a href="#before" role="tab" data-toggle="tab">Before you start</a></li>
+			}
+			@if (CurrentPage.HasValue("whatYouNeedToKnow"))
+        	{
+  				<li class="@if (!CurrentPage.HasValue("beforeYouStart")) { <text>active</text> }"><a href="#need" role="tab" data-toggle="tab">What you need to know</a></li>
+			}
+			@if (CurrentPage.HasValue("otherWaysToApply"))
+        	{
+				<li class="@if (!CurrentPage.HasValue("beforeYouStart") && !CurrentPage.HasValue("whatYouNeedToKnow")) { <text>active</text> }"><a href="#other" role="tab" data-toggle="tab">Other ways to apply</a></li>
+			}
+		</ul>
+
+		<div class="tab-content">
+			<div class="tab-pane @if (CurrentPage.HasValue("beforeYouStart")) { <text>active</text> }" id="before">@Umbraco.Field("beforeYouStart")</div>
+  			<div class="tab-pane @if (!CurrentPage.HasValue("beforeYouStart") && CurrentPage.HasValue("whatYouNeedToKnow")) { <text>active</text> }" id="need">@Umbraco.Field("whatYouNeedToKnow")</div>
+  			<div class="tab-pane @if (!CurrentPage.HasValue("beforeYouStart") && !CurrentPage.HasValue("whatYouNeedToKnow") && CurrentPage.HasValue("otherWaysToApply")) { <text>active</text> }" id="other">@Umbraco.Field("otherWaysToApply")</div>
+		</div>
+    </div>
+    <div class="col-md-3">
+        @Html.Partial("RelatedLinks")
+    </div>
+</div>
+
+<div class="row">
+	<div class="col-xs-12">
+		<p class="report-a-problem"><a href="#">Is there anything wrong with this page?</a></p>
+		<p class="page-meta">Last updated: @(CurrentPage.updateDate.ToString("d MMMM yyyy"))</p>
+	</div>
+</div>

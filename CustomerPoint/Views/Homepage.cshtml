@@ -1,0 +1,47 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "Sections.cshtml";
+}
+@section PageHeader 
+{
+	<div class="homepage-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8">
+					<div class="homepage-banner">
+						<h1>@Umbraco.Field("title")</h1>
+						@Umbraco.Field("bodyText")
+					</div>
+				</div>
+				@*<div class="col-md-4">
+					<div class="site-highlights hidden-sm hidden-xs">
+						<h4>Popular</h4>
+						<ul class="list-unstyled">
+						</ul>
+					</div>
+				</div>*@
+			</div>
+		</div>
+	</div>
+}		
+<div class="homepage-links">
+@Html.Partial(
+            "HomepageLinkList", 
+            Model.Content, 
+            new ViewDataDictionary()
+            {
+				{ "mainName", "" }
+            }
+)
+</div>
+<div class="row">
+	<div class="col-md-6">
+		@Html.Partial("HomepageNews") 
+	</div>
+
+	<div class="col-md-6">
+		@Html.Partial("HomepageEvents") 
+	</div>
+</div>
+@section Footer { }
+@section Scripts { } 

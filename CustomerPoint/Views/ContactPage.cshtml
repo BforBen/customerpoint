@@ -1,0 +1,39 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "Site.cshtml";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="page-header">
+            <h1>Contact: @Umbraco.Field("title")</h1>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        @if ( @Umbraco.Field("emailAddress") != null )
+        {
+            <h2>Online</h2>
+            
+			@Html.Partial("DisplayContactForm")
+        }
+    </div>
+    <div class="col-md-6">
+        @if ( @Umbraco.Field("telephone") != null )
+        {
+            <h2>Telephone</h2>
+            <p class="lead">@Umbraco.Field("telephone")</p>
+        }
+
+        @if ( @Umbraco.Field("address") != null )
+        {
+            <h2>Address</h2>
+            <p>@Umbraco.Field("address")</p>
+        }
+        @Umbraco.Field("bodyText")
+
+        @Html.Partial("RelatedLinks")
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "Site.cshtml";
+}
+@section Metadata {
+    @RenderSection("Metadata", false)
+}
+<div class="row">
+    <div class="col-lg-8">
+        @RenderBody()
+    </div>
+    <div class="col-lg-4">
+        @Html.Partial("SideNavigation")
+        @Html.Partial("RelatedLinks")
+        @Html.Partial("ContactLinks")
+		@RenderSection("Sidebar", false)
+    </div>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+		<p class="report-a-problem"><a href="#">Is there anything wrong with this page?</a></p>
+		<p class="page-meta">Last updated: @(CurrentPage.updateDate.ToString("d MMMM yyyy"))</p>
+	</div>
+</div>
+@section Scripts {
+    @RenderSection("Scripts", false) 
+}
+@section Footer {
+    @RenderSection("Footer", false)
+}

@@ -1,0 +1,8 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "SideNavPages.cshtml";
+}
+@Html.Partial("PageHeader")
+<h3>Starts: @Umbraco.Field("eventStart", formatAsDateWithTime: true, formatAsDateWithTimeSeparator: "")</h3>
+<h3>Ends: @Umbraco.Field("eventEnd", formatAsDateWithTime: true, formatAsDateWithTimeSeparator: "")</h3>
+@Umbraco.Field("bodyText")
